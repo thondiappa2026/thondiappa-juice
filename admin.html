@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="ta" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>அட்மின் மேலாண்மை பலகை | Thondi Appa Fresh Juice Admin</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #ea580c;
+            --primary-hover: #c2410c;
+            --emerald: #047857;
+            --bg-body: #F8FAFC;
+            --bg-card: #FFFFFF;
+            --text-main: #0F172A;
+            --text-muted: #64748B;
+            --border-color: #E2E8F0;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+            --radius-lg: 16px;
+            --radius-md: 12px;
+            --font-main: 'Poppins', 'Noto Sans Tamil', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-main);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            padding-bottom: 50px;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: white;
+            border-bottom: 1px solid var(--border-color);
+            padding: 14px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .header-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), #f97316);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+        }
+
+        .brand-title {
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+        .brand-title span { color: var(--primary); }
+
+        .brand-subtitle {
+            font-size: 10px;
+            color: var(--text-muted);
+        }
+
+        .btn-view-site {
+            background: #F1F5F9;
+            color: var(--text-main);
+            text-decoration: none;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: background 0.2s;
+        }
+        .btn-view-site:hover { background: #E2E8F0; }
+
+        .main-container {
+            max-width: 1100px;
+            margin: 20px auto;
+            padding: 0 16px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            margin-bottom: 24px;
+        }
+        @media (max-width: 768px) { .stats-grid { grid-template-columns: 1fr; } }
+
+        .stat-card {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .stat-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: #FFF7ED;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .stat-info h4 { font-size: 11px; color: var(--text-muted); font-weight: 600; }
+        .stat-info div { font-size: 18px; font-weight: 800; color: var(--text-main); margin-top: 2px; }
+
+        .card-box {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 24px;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 12px;
+        }
+
+        .card-header h3 {
+            font-size: 15px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-main);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), #f97316);
+            color: white;
+            border: none;
+            padding: 9px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 4px 12px rgba(234, 88, 12, 0.3);
+            transition: transform 0.2s;
+        }
+        .btn-primary:active { transform: scale(0.97); }
+
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+
+        th, td {
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background: #F8FAFC;
+            font-weight: 700;
+            color: var(--text-muted);
+        }
+
+        .item-row-img {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            object-fit: cover;
+            border: 1px solid var(--border-color);
+        }
+
+        .badge-cat {
+            background: #F1F5F9;
+            color: var(--text-main);
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        .action-btns { display: flex; gap: 6px; }
+        .btn-icon-action {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            transition: opacity 0.2s;
+        }
+        .btn-edit { background: #FEF3C7; color: #D97706; }
+        .btn-delete { background: #FEE2E2; color: #EF4444; }
+        .btn-icon-action:hover { opacity: 0.8; }
+
+        /* Modal for Add / Edit Item */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+        .modal-overlay.active { display: flex; }
+
+        .modal-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 450px;
+            padding: 24px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .form-group { margin-bottom: 12px; }
+        .form-group label { font-size: 10px; font-weight: 700; color: var(--text-muted); margin-bottom: 4px; display: block; }
+        .form-input, .form-select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 12px;
+            outline: none;
+            background: #F8FAFC;
+        }
+        .form-input:focus, .form-select:focus { border-color: var(--primary); background: white; }
+
+        .modal-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 16px;
+        }
+        .btn-cancel {
+            flex: 1;
+            background: #F1F5F9;
+            color: var(--text-muted);
+            border: none;
+            padding: 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .btn-save {
+            flex: 2;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="header-container">
+            <div class="brand-box">
+                <div class="brand-icon"><i class="fa-solid fa-gauge-high"></i></div>
+                <div>
+                    <div class="brand-title">தொண்டி அப்பா <span>அட்மின் பலகை</span></div>
+                    <div class="brand-subtitle">Sabanayagar St, Chidambaram</div>
+                </div>
+            </div>
+            <a href="index.html" target="_blank" class="btn-view-site">
+                <i class="fa-solid fa-globe"></i> <span>கஸ்டமர் பக்கத்தைப் பார்</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fa-solid fa-wine-glass-empty"></i></div>
+                <div class="stat-info">
+                    <h4>மொத்த ஜூஸ்கள்</h4>
+                    <div id="totalItemsCount">0</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background: #ECFDF5; color: var(--emerald);"><i class="fa-solid fa-shield-halved"></i></div>
+                <div class="stat-info">
+                    <h4>கடை நிலை</h4>
+                    <div style="color: var(--emerald); font-size: 15px;">🟢 திறந்துள்ளது (Open)</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background: #EFF6FF; color: #2563EB;"><i class="fa-brands fa-whatsapp"></i></div>
+                <div class="stat-info">
+                    <h4>ஆர்டர் போன் எண்</h4>
+                    <div style="font-size: 14px;">9940 0525 66</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Menu Manager Table -->
+        <div class="card-box">
+            <div class="card-header">
+                <h3><i class="fa-solid fa-list-check" style="color: var(--primary);"></i> மெனு & விலை மேலாண்மை</h3>
+                <button class="btn-primary" onclick="openAddModal()">
+                    <i class="fa-solid fa-plus"></i> புதிய ஜூஸ் சேர்
+                </button>
+            </div>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>படம்</th>
+                            <th>பெயர் (தமிழ்)</th>
+                            <th>பெயர் (English)</th>
+                            <th>வகை (Category)</th>
+                            <th>விலை (Price)</th>
+                            <th>செயல்பாடுகள்</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Add/Edit Modal -->
+    <div class="modal-overlay" id="itemModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 id="modalTitleText">புதிய ஜூஸ் சேர்</h3>
+                <button style="background:none; border:none; font-size:16px; cursor:pointer;" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form onsubmit="handleSaveItem(event)">
+                <input type="hidden" id="editIndex" value="-1">
+                <div class="form-group">
+                    <label>தமிழ் பெயர் (Tamil Name) *</label>
+                    <input type="text" class="form-input" id="inpNameTa" required placeholder="எ.கா. மாதுளை பிரஷ் ஜூஸ்">
+                </div>
+                <div class="form-group">
+                    <label>ஆங்கில பெயர் (English Name) *</label>
+                    <input type="text" class="form-input" id="inpNameEn" required placeholder="Pomegranate Juice">
+                </div>
+                <div class="form-group">
+                    <label>வகை (Category) *</label>
+                    <select class="form-select" id="inpCategory">
+                        <option value="fresh">Fresh Juice (பிரஷ் ஜூஸ்)</option>
+                        <option value="shake">Milkshake (மில்க்‌ஷேக்)</option>
+                        <option value="water">Mineral Water (மினரல் வாட்டர்)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>அடிப்படை விலை (Base Price ₹) *</label>
+                    <input type="number" class="form-input" id="inpPrice" required placeholder="80">
+                </div>
+                <div class="form-group">
+                    <label>படத்தின் URL (Image URL) *</label>
+                    <input type="url" class="form-input" id="inpImg" required placeholder="https://images.unsplash.com/...">
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-cancel" onclick="closeModal()">ரத்து</button>
+                    <button type="submit" class="btn-save">சேமி (Save)</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const defaultMenuData = [
+            { id: 1, category: 'fresh', nameTa: 'மாதுளை பிரஷ் ஜூஸ்', nameEn: 'Pomegranate Juice', price: 80, img: 'https://images.unsplash.com/photo-1595855759920-86582396756a?auto=format&fit=crop&w=500&q=80' },
+            { id: 2, category: 'fresh', nameTa: 'மால்ட்டோ ஆரஞ்சு ஜூஸ்', nameEn: 'Malto Orange Juice', price: 80, img: 'https://images.unsplash.com/photo-1613478223719-2ab802602423?auto=format&fit=crop&w=500&q=80' },
+            { id: 3, category: 'fresh', nameTa: 'ஆப்பிள் பிரஷ் ஜூஸ்', nameEn: 'Apple Juice', price: 80, img: 'https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?auto=format&fit=crop&w=500&q=80' },
+            { id: 4, category: 'fresh', nameTa: 'சாத்துக்குடி ஜூஸ்', nameEn: 'Mosambi Sweet Lime Juice', price: 50, img: 'https://images.unsplash.com/photo-1534353473418-4cfa6c56fd38?auto=format&fit=crop&w=500&q=80' },
+            { id: 5, category: 'fresh', nameTa: 'அத்திப்பழம் ஜூஸ்', nameEn: 'Fresh Fig Juice', price: 60, img: 'https://images.unsplash.com/photo-1597818449629-373673f4dd06?auto=format&fit=crop&w=500&q=80' },
+            { id: 6, category: 'fresh', nameTa: 'செவ்வாழை பிரஷ் ஜூஸ்', nameEn: 'Red Banana Juice', price: 60, img: 'https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?auto=format&fit=crop&w=500&q=80' },
+            { id: 7, category: 'fresh', nameTa: 'அன்னாசி பிரஷ் ஜூஸ்', nameEn: 'Pineapple Juice', price: 60, img: 'https://images.unsplash.com/photo-1550258987-190a2d41a8ba?auto=format&fit=crop&w=500&q=80' },
+            { id: 8, category: 'fresh', nameTa: 'கருப்பு திராட்சை ஜூஸ்', nameEn: 'Black Grapes Juice', price: 60, img: 'https://images.unsplash.com/photo-1537640538966-79f369143f8f?auto=format&fit=crop&w=500&q=80' },
+            { id: 9, category: 'fresh', nameTa: 'தர்பூசணி குளிர் ஜூஸ்', nameEn: 'Watermelon Juice', price: 40, img: 'https://images.unsplash.com/photo-1589984662646-e7b2e4962f18?auto=format&fit=crop&w=500&q=80' },
+            { id: 10, category: 'fresh', nameTa: 'முலாம்பழம் கிர்ணி ஜூஸ்', nameEn: 'Muskmelon Kirni Juice', price: 40, img: 'https://images.unsplash.com/photo-1592417817098-8f3d691a4bf5?auto=format&fit=crop&w=500&q=80' },
+            { id: 11, category: 'fresh', nameTa: 'மாம்பழ ஜூஸ்', nameEn: 'Alphonso Mango Juice', price: 60, img: 'https://images.unsplash.com/photo-1591073113125-e46713c829ed?auto=format&fit=crop&w=500&q=80' },
+            { id: 12, category: 'fresh', nameTa: 'லெமன் ஜூஸ்', nameEn: 'Fresh Lemon Juice', price: 30, img: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=500&q=80' },
+            { id: 13, category: 'fresh', nameTa: 'லெமன் சோடா', nameEn: 'Fresh Lemon Soda', price: 30, img: 'https://images.unsplash.com/photo-1621263764928-df1444c5e859?auto=format&fit=crop&w=500&q=80' },
+            { id: 14, category: 'shake', nameTa: 'சாக்லேட் ஷேக்', nameEn: 'Chocolate Shake', price: 70, img: 'https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=500&q=80' },
+            { id: 15, category: 'shake', nameTa: 'பாதாம் ஷேக்', nameEn: 'Badam Shake', price: 70, img: 'https://images.unsplash.com/photo-1579954115545-aad51642a691?auto=format&fit=crop&w=500&q=80' },
+            { id: 16, category: 'shake', nameTa: 'ரோஸ் மில்க்', nameEn: 'Delicious Rose Milk', price: 50, img: 'https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=500&q=80' },
+            { id: 17, category: 'shake', nameTa: 'பாதாம் மில்க்', nameEn: 'Badam Milk (Pure Milk)', price: 50, img: 'https://images.unsplash.com/photo-1541658016709-82535e94bc69?auto=format&fit=crop&w=500&q=80' },
+            { id: 18, category: 'water', nameTa: '500 ml மினரல் வாட்டர்', nameEn: '500 ml Mineral Water Bottle', price: 10, img: 'https://images.unsplash.com/photo-1523362628745-0c100150b504?auto=format&fit=crop&w=500&q=80' },
+            { id: 19, category: 'water', nameTa: '1 Liter மினரல் வாட்டர்', nameEn: '1 Liter Mineral Water Bottle', price: 20, img: 'https://images.unsplash.com/photo-1523362628745-0c100150b504?auto=format&fit=crop&w=500&q=80' }
+        ];
+
+        function getStoredMenu() {
+            const data = localStorage.getItem('thondi_appa_menu');
+            if (data) {
+                try { return JSON.parse(data); } catch(e) {}
+            }
+            return defaultMenuData;
+        }
+
+        function saveMenu(menu) {
+            localStorage.setItem('thondi_appa_menu', JSON.stringify(menu));
+        }
+
+        function renderAdminTable() {
+            const menu = getStoredMenu();
+            document.getElementById('totalItemsCount').innerText = menu.length;
+            const tbody = document.getElementById('adminTableBody');
+            tbody.innerHTML = '';
+
+            menu.forEach((item, index) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><img src="${item.img}" class="item-row-img" alt=""></td>
+                    <td style="font-weight:700;">${item.nameTa}</td>
+                    <td style="color:var(--text-muted);">${item.nameEn}</td>
+                    <td><span class="badge-cat">${item.category}</span></td>
+                    <td style="font-weight:800; color:var(--primary);">₹${item.price}</td>
+                    <td>
+                        <div class="action-btns">
+                            <button class="btn-icon-action btn-edit" onclick="openEditModal(${index})" title="Edit"><i class="fa-solid fa-pen"></i></button>
+                            <button class="btn-icon-action btn-delete" onclick="deleteItem(${index})" title="Delete"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function openAddModal() {
+            document.getElementById('modalTitleText').innerText = "புதிய ஜூஸ் சேர்";
+            document.getElementById('editIndex').value = -1;
+            document.getElementById('inpNameTa').value = '';
+            document.getElementById('inpNameEn').value = '';
+            document.getElementById('inpCategory').value = 'fresh';
+            document.getElementById('inpPrice').value = '';
+            document.getElementById('inpImg').value = '';
+            document.getElementById('itemModal').classList.add('active');
+        }
+
+        function openEditModal(index) {
+            const menu = getStoredMenu();
+            const item = menu[index];
+            document.getElementById('modalTitleText').innerText = "ஜூஸ் விவரங்களைத் திருத்து";
+            document.getElementById('editIndex').value = index;
+            document.getElementById('inpNameTa').value = item.nameTa;
+            document.getElementById('inpNameEn').value = item.nameEn;
+            document.getElementById('inpCategory').value = item.category;
+            document.getElementById('inpPrice').value = item.price;
+            document.getElementById('inpImg').value = item.img;
+            document.getElementById('itemModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('itemModal').classList.remove('active');
+        }
+
+        function handleSaveItem(e) {
+            e.preventDefault();
+            const index = parseInt(document.getElementById('editIndex').value);
+            const menu = getStoredMenu();
+
+            const newItem = {
+                id: index >= 0 ? menu[index].id : Date.now(),
+                nameTa: document.getElementById('inpNameTa').value.trim(),
+                nameEn: document.getElementById('inpNameEn').value.trim(),
+                category: document.getElementById('inpCategory').value,
+                price: Number(document.getElementById('inpPrice').value),
+                img: document.getElementById('inpImg').value.trim()
+            };
+
+            if (index >= 0) {
+                menu[index] = newItem;
+            } else {
+                menu.push(newItem);
+            }
+
+            saveMenu(menu);
+            closeModal();
+            renderAdminTable();
+            alert("வெற்றிகரமாக சேமிக்கப்பட்டது! (Saved successfully)");
+        }
+
+        function deleteItem(index) {
+            if (confirm("நிச்சயமாக இந்த ஜூஸை நீக்க விரும்புகிறீர்களா?")) {
+                const menu = getStoredMenu();
+                menu.splice(index, 1);
+                saveMenu(menu);
+                renderAdminTable();
+            }
+        }
+
+        renderAdminTable();
+    </script>
+</body>
+</html>
